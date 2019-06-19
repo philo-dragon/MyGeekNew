@@ -1,0 +1,104 @@
+ext {
+
+    android = [
+            compileSdkVersion: 28,
+            applicationId    : "com.pfl.geeknews",
+            minSdkVersion    : 16,
+            targetSdkVersion : 28,
+            buildToolsVersion: "29.0.0",
+            versionCode      : 1,
+            versionName      : "1.0"
+    ]
+
+    androidSupport = [
+            support   : "1.0.0-beta01",
+            constraint: "1.1.3",
+    ]
+
+    depsVersion = [
+
+            retrofit                  : "2.6.0",
+            retrofit_converter_gson   : "2.6.0",
+            retrofit_converter_scalars: "2.6.0",
+            adapter_rxjava            : "2.6.0",
+
+            rxJava                    : "2.2.9",
+            rxAndroid                 : "2.1.1",
+
+            okHttp                    : "3.14.2",
+            okio                      : "2.2.2",
+            logging_interceptor       : "3.8.1",
+
+            dagger                    : "2.23.1",
+            glide                     : "4.8.0",
+
+    ]
+
+    supportDeps = [
+            supportv4        : "androidx.legacy:legacy-support-v4:${androidSupport.support}",
+            appcompatv7      : "com.android.support:appcompat-v7:${androidSupport.support}",
+            cardview         : "androidx.cardview:cardview:${androidSupport.support}",
+            design           : "com.google.android.material:material:${androidSupport.support}",
+            constraint_layout: "androidx.constraintlayout:constraintlayout:1.1.3",
+            annotations      : "androidx.annotation:annotation:${androidSupport.support}",
+            core_ktx         : "androidx.core:core-ktx:1.2.0-alpha02"
+    ]
+
+    rxJava = [
+            rxJava   : "io.reactivex.rxjava2:rxjava:${depsVersion.rxJava}",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:${depsVersion.rxAndroid}",
+    ]
+
+    retrofit = [
+            retrofit              : "com.squareup.retrofit2:retrofit:${depsVersion.retrofit}",
+            retrofitConverterGson : "com.squareup.retrofit2:converter-gson:${depsVersion.retrofit_converter_gson}",
+            retrofitAdapterRxjava2: "com.squareup.retrofit2:adapter-rxjava2:${depsVersion.adapter_rxjava}"
+    ]
+
+    okHttp = [
+            okHttp             : "com.squareup.okhttp3:okhttp:${depsVersion.okHttp}",
+            okio               : "com.squareup.okio:okio:${depsVersion.okio}",
+            logging_interceptor: "com.squareup.okhttp3:logging-interceptor:${depsVersion.logging_interceptor}"
+    ]
+
+    commonDeps = [
+            multide                 : 'com.android.support:multidex:1.0.3',
+            //leakcanary_android      : "com.squareup.leakcanary:leakcanary-android:1.6.3",
+            //leakcanary_android_no_op: "com.squareup.leakcanary:leakcanary-android-no-op:1.6.3",
+            glide                   : "com.github.bumptech.glide:glide:${depsVersion.glide}",
+            glide_okhttp            : "com.github.bumptech.glide:okhttp3-integration:${depsVersion.glide}",
+            dagger                  : "com.google.dagger:dagger:${depsVersion.dagger}",
+            brvah                   : 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.45',
+            eventbus                : 'org.greenrobot:eventbus:3.1.1',
+            circleimageview         : "de.hdodenhof:circleimageview:3.0.0",
+            flexibledivider         : "com.yqritc:recyclerview-flexibledivider:1.4.0",
+            banner                  : "com.youth.banner:banner:1.4.10",
+    ]
+
+    testDeps = [
+            junit           : 'junit:junit:4.12',
+    ]
+
+    compiler = [
+            "glide_compiler"         : "com.github.bumptech.glide:compiler:${depsVersion.glide}",
+            "dagger_compiler"        : "com.google.dagger:dagger-compiler:${depsVersion.dagger}",
+            "dagger_android_compiler": "com.google.dagger:dagger-android-processor:${depsVersion.dagger}",
+    ]
+
+    other = [
+    ]
+
+    supportLibs = supportDeps.values()
+    retrofitLibs = retrofit.values()
+    okHttpLibs = okHttp.values()
+    rxJavaLibs = rxJava.values()
+    commonLibs = commonDeps.values()
+    testLibs = testDeps.values()
+
+    annotationProcessorLibs = [
+            compiler["glide_compiler"],
+            compiler["dagger_compiler"],
+            compiler["dagger_android_compiler"],
+    ]
+
+}

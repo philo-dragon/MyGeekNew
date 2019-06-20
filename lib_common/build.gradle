@@ -13,6 +13,11 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,6 +29,7 @@ android {
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     api rootProject.ext.testLibs
     api rootProject.ext.supportLibs
@@ -31,5 +37,6 @@ dependencies {
     api rootProject.ext.okHttpLibs
     api rootProject.ext.rxJavaLibs
     api rootProject.ext.commonLibs
+
     annotationProcessor rootProject.ext.annotationProcessorLibs
 }

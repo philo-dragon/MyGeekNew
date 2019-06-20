@@ -79,7 +79,7 @@ public class DisplayUtil {
   * 将sp值转换为px值，保证文字大小不变
   * 
   * @param spValue
-  * @param Context
+  * @param context
   * @return
   */
  public static float sp2px(float spValue,Context context) {

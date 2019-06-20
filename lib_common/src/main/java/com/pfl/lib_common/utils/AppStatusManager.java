@@ -3,7 +3,7 @@ package com.pfl.lib_common.utils;
 public class AppStatusManager {
     public int appStatus = AppStatus.STATUS_RECYCLE;    //APP状态 初始值为不在前台状态
 
-    public static AppStatusManager appStatusManager;
+    public volatile static AppStatusManager appStatusManager;
 
     private AppStatusManager(){}
 

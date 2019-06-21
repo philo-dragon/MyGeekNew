@@ -16,11 +16,8 @@ import java.util.concurrent.TimeUnit;
 public class RetrofitClient {
 
     private static final int DEFAULT_TIMEOUT = 5;
-
-    private OkHttpClient okHttpClient;
-
     private static Context mContext;
-
+    private static Retrofit mRetrofit;
     private static RetrofitClient sNewInstance;
 
     private static class SingletonHolder {
@@ -44,7 +41,6 @@ public class RetrofitClient {
     }
 
     private RetrofitClient(Context context) {
-
         this(context, null);
     }
 
@@ -57,17 +53,21 @@ public class RetrofitClient {
         HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new HttpLogger());
         logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
-        okHttpClient = new OkHttpClient.Builder()
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .addNetworkInterceptor(logInterceptor)
                 .cookieJar(new CookieManger(context))
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .build();
 
-        Retrofit retrofit = new Retrofit.Builder()
+        mRetrofit = new Retrofit.Builder()
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(url)
                 .build();
+    }
+
+    public <T> T create(Class<T> clazz) {
+        return mRetrofit.create(clazz);
     }
 
 

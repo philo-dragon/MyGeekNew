@@ -1,14 +1,11 @@
 package com.pfl.lib_common.base
 
 import android.annotation.SuppressLint
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.google.gson.JsonParseException
 import com.pfl.lib_common.exception.ApiException
 import com.pfl.lib_common.exception.NoNetworkException
-import com.pfl.lib_common.utils.TestUtil.*
+import com.pfl.lib_common.base.ErrorType.*
 import kotlinx.coroutines.*
 import org.json.JSONException
 import retrofit2.HttpException
@@ -19,6 +16,14 @@ import java.text.ParseException
 
 
 open class BaseViewModel : ViewModel(), LifecycleObserver {
+
+    private val errorLiveData: MutableLiveData<ErrorBean> = MutableLiveData()
+
+    fun getErrorObserve(): LiveData<ErrorBean> {
+
+        return errorLiveData
+    }
+
 
     fun launch(tryBlock: suspend CoroutineScope.() -> Unit) {
         viewModelScope.launch { tryCatch(tryBlock, {}, {}) }
@@ -86,13 +91,13 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
             CONNECT_ERROR,
             CONNECT_TIMEOUT,
             NOT_NETWORK -> {
-                println("没有网络")
+                errorLiveData.value = ErrorBean(type, message)
             }
             API_ERROR -> {
-                println("接口异常")
+                errorLiveData.value = ErrorBean(type, message)
             }
             else -> {
-                println("未知错误")
+                errorLiveData.value = ErrorBean(type, "未知错误")
             }
         }
     }

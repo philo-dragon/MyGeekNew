@@ -1,11 +1,11 @@
-package com.pfl.lib_common.utils;
+package com.pfl.lib_common.base;
 
 import androidx.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 
-public class TestUtil {
+public class ErrorType {
 
     /**
      * api正常返回异常
@@ -40,4 +40,5 @@ public class TestUtil {
     @Retention(RetentionPolicy.SOURCE)
     public @interface ErrrorType {
     }
+
 }

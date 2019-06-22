@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="colorAccent">#fde312</color>
+    <color name="colorPrimary">#2fa0ef</color>
+    <color name="white">#ffffff</color>
+
+    <color name="background">#FFF3F4F3</color>
+    <color name="color_transparent">#00000000</color>
+    <color name="color_333333">#FF333333</color>
+    <color name="color_b2b2b2">#FFB2B2B2</color>
+
     <color name="blue">#4285F4</color>
     <color name="green">#34A853</color>
     <color name="yellow">#FBBC05</color>
     <color name="red">#EA4335</color>
-    <color name="colorAccent">#fde312</color>
-    <color name="colorPrimary">#2fa0ef</color>
-    <color name="white">#ffffff</color>
+
     <color name="darkBlue">#4E587E</color>
     <color name="greyBlue1">#9A9DAF</color>
     <color name="greyBlue0">#CCCDD6</color>

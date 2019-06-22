@@ -26,8 +26,13 @@ class MainActivity : AppCompatActivity(), LifecycleOwner {
 
     fun startObserve() {
         loginViewModel.apply {
+
             loginLiveData.observe(this@MainActivity, Observer {
                 toast("请求成功")
+            })
+
+            getErrorObserve().observe(this@MainActivity, Observer {
+
             })
         }
     }

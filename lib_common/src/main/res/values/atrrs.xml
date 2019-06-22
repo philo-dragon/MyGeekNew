@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- icon着色 -->
+    <attr name="drawable_tint" format="color" />
+    <!-- 跟随焦点 -->
+    <attr name="drawable_follow_focus" format="boolean" />
+
+    <!-- 带眼睛的输入框 -->
+    <declare-styleable name="EyesEditTextStyle">
+        <!-- 明文图标 -->
+        <attr name="drawable_visibility" format="reference" />
+        <!-- 密文图标 -->
+        <attr name="drawable_visibility_off" format="reference" />
+        <attr name="drawable_tint" />
+        <attr name="drawable_follow_focus" />
+    </declare-styleable>
+
+    <!-- 带清除的输入框 -->
+    <declare-styleable name="ClearEditTextStyle">
+        <!-- 图标 -->
+        <attr name="drawable_clear" format="reference" />
+        <attr name="drawable_tint" />
+        <attr name="drawable_follow_focus" />
+    </declare-styleable>
+
+
+
+</resources>

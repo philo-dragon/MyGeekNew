@@ -16,28 +16,18 @@ import java.util.concurrent.TimeUnit;
 public class RetrofitClient {
 
     private static final int DEFAULT_TIMEOUT = 5;
-    private static Context mContext;
     private static Retrofit mRetrofit;
-    private static RetrofitClient sNewInstance;
 
     private static class SingletonHolder {
-        private static RetrofitClient INSTANCE = new RetrofitClient(mContext);
+        private static RetrofitClient INSTANCE = new RetrofitClient(App.getInstance());
     }
 
-    public static RetrofitClient getInstance(Context context) {
-        if (context != null) {
-            mContext = context;
-        }
+    public static RetrofitClient getInstance() {
         return SingletonHolder.INSTANCE;
     }
 
-
-    public static RetrofitClient getInstance(Context context, String url) {
-        if (context != null) {
-            mContext = context;
-        }
-        sNewInstance = new RetrofitClient(context, url);
-        return sNewInstance;
+    public static RetrofitClient getInstance(String url) {
+        return new RetrofitClient(App.getInstance(), url);
     }
 
     private RetrofitClient(Context context) {

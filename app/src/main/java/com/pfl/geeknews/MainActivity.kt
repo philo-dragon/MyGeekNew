@@ -10,21 +10,25 @@ import com.pfl.lib_common.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 
-    override fun getContentView(): Int {
-        return R.layout.activity_main
+    private val loginViewModel by lazy(LazyThreadSafetyMode.NONE) {
+        ViewModelProviders.of(this).get(LoginViewModel::class.java)
     }
 
-    private lateinit var loginViewModel: LoginViewModel
+    override fun getContentView() = R.layout.activity_main
 
     override fun initData(savedInstanceState: Bundle?) {
-        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel::class.java)
         startObserve()
     }
 
-    fun startObserve() {
+    private fun startObserve() {
         loginViewModel.apply {
 
             loginLiveData.observe(this@MainActivity, Observer {
+                dismissDialog()
+                toast("请求成功")
+            })
+
+            dailyLiveData.observe(this@MainActivity, Observer {
                 dismissDialog()
                 toast("请求成功")
             })

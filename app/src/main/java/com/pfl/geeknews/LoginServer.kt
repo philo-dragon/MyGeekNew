@@ -1,9 +1,8 @@
 package com.pfl.geeknews
 
 import com.pfl.lib_common.base.HttpResponse
-import retrofit2.http.Field
-import retrofit2.http.POST
-import retrofit2.http.FormUrlEncoded
+import io.reactivex.Observable
+import retrofit2.http.*
 
 
 interface LoginServer {
@@ -18,5 +17,8 @@ interface LoginServer {
     @FormUrlEncoded
     @POST("user/login")
     suspend fun login(@Field("tel") account: String, @Field("pwd") password: String): HttpResponse<User>
+
+    @GET("day/{year}/{month}/{day}")
+    suspend fun getDaily( @Path("year") year: Int,@Path("month") month: Int, @Path("day") day: Int): HttpResponse<Daily>
 
 }

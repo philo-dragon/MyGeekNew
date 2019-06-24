@@ -15,7 +15,7 @@ import java.net.UnknownHostException
 import java.text.ParseException
 
 
-open class BaseViewModel : ViewModel(), LifecycleObserver {
+open class BaseViewModel : ViewModel() {
 
     private val errorLiveData: MutableLiveData<ErrorBean> = MutableLiveData()
 
@@ -23,7 +23,6 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
 
         return errorLiveData
     }
-
 
     fun launch(tryBlock: suspend CoroutineScope.() -> Unit) {
         viewModelScope.launch { tryCatch(tryBlock, {}, {}) }

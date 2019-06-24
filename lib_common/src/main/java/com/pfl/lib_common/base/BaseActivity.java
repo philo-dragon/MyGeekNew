@@ -68,7 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity implements IActivit
     /**
      * @return 是否深色模式
      */
-    private boolean isDarkMode() {
+    public boolean isDarkMode() {
         return true;
     }
 

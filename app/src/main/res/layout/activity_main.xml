@@ -7,15 +7,36 @@
         android:layout_height="match_parent"
         tools:context=".MainActivity">
 
-    <TextView
-            android:onClick="requestData"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Hello World!"
+    <com.pfl.lib_common.wedget.NestedScrollingDetailContainer
+            android:id="@+id/nestedContainer"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="OnClick"/>
+            app:layout_constraintTop_toTopOf="parent">
+
+        <com.pfl.lib_common.wedget.NestedScrollingWebView
+                android:id="@+id/webContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="nested_scroll_webview" />
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:text="不可滑动的View"
+                android:textSize="30dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:tag="nested_scroll_recyclerview" />
+
+
+    </com.pfl.lib_common.wedget.NestedScrollingDetailContainer>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

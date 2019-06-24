@@ -12,8 +12,8 @@ class LoginViewModel : BaseViewModel() {
 
     fun login(userName: String, passWord: String) {
         launch {
-            var response = withContext(Dispatchers.IO) { repository.login(userName, passWord) }
-            executeResponse(response, { loginLiveData.value = response.data }, { })
+            val response = withContext(Dispatchers.IO) { repository.login(userName, passWord) }
+            executeResponse(response) { loginLiveData.value = response.data }
         }
     }
 }

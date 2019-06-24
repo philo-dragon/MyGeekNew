@@ -53,11 +53,13 @@ open class BaseViewModel : ViewModel(), LifecycleObserver {
     suspend fun executeResponse(
         response: HttpResponse<Any>
         , successBlock: suspend CoroutineScope.() -> Unit
-        , errorBlock: suspend CoroutineScope.() -> Unit
     ) {
         coroutineScope {
-            if (response.errorCode == -1) errorBlock()
-            else successBlock()
+            if (response.errorCode == 0) {
+                successBlock()
+            } else {
+                onError(ApiException(response.errorCode, response.errorMsg))
+            }
         }
     }
 

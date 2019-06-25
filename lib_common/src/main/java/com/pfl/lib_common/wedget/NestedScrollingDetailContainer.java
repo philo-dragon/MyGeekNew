@@ -1,5 +1,6 @@
 package com.pfl.lib_common.wedget;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.*;
@@ -11,6 +12,7 @@ import androidx.core.view.NestedScrollingParentHelper;
 import androidx.core.view.ViewCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,6 +145,38 @@ public class NestedScrollingDetailContainer extends ViewGroup implements NestedS
     }
 
     @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        final int action = ev.getAction();
+        switch (action & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                mLastMotionY = (int) ev.getY();
+                mIsBeingDragged = false;
+                break;
+            case MotionEvent.ACTION_MOVE:
+                // 拦截落在不可滑动子View的MOVE事件
+                final int y = (int) ev.getY();
+                final int yDiff = Math.abs(y - mLastMotionY);
+                boolean isInNestedChildViewArea = isTouchNestedInnerView((int)ev.getRawX(), (int)ev.getRawY());
+                if (yDiff > TOUCH_SLOP && !isInNestedChildViewArea) {
+                    mIsBeingDragged = true;
+                    mLastMotionY = y;
+                    final ViewParent parent = getParent();
+                    if (parent != null) {
+                        parent.requestDisallowInterceptTouchEvent(true);
+                    }
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                mIsBeingDragged = false;
+                break;
+        }
+
+        return mIsBeingDragged;
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
@@ -166,36 +200,6 @@ public class NestedScrollingDetailContainer extends ViewGroup implements NestedS
         return true;
     }
 
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
-        final int action = ev.getAction();
-        switch (action & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_MOVE:
-                // 拦截落在不可滑动子View的MOVE事件
-                final int y = (int) ev.getY();
-                final int yDiff = Math.abs(y - mLastMotionY);
-                boolean isInNestedChildViewArea = isTouchNestedInnerView((int)ev.getRawX(), (int)ev.getRawY());
-                if (yDiff > TOUCH_SLOP && !isInNestedChildViewArea) {
-                    mIsBeingDragged = true;
-                    mLastMotionY = y;
-                    final ViewParent parent = getParent();
-                    if (parent != null) {
-                        parent.requestDisallowInterceptTouchEvent(true);
-                    }
-                }
-                break;
-            case MotionEvent.ACTION_DOWN:
-                mLastMotionY = (int) ev.getY();
-                mIsBeingDragged = false;
-                break;
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL:
-                mIsBeingDragged = false;
-                break;
-        }
-
-        return mIsBeingDragged;
-    }
 
     public void scrollToTarget(View view) {
         if (view == null) {
@@ -469,7 +473,7 @@ public class NestedScrollingDetailContainer extends ViewGroup implements NestedS
     }
 
     @Override
-    public boolean onNestedPreFling(View target, float velocityX, float velocityY) {
+    public boolean onNestedPreFling(@NotNull View target, float velocityX, float velocityY) {
         if (target instanceof NestedScrollingWebView) {
             //WebView滑到底部时，继续向下滑动父控件和RV
             mCurFlyingType = FLYING_FROM_WEBVIEW_TO_PARENT;
@@ -486,7 +490,7 @@ public class NestedScrollingDetailContainer extends ViewGroup implements NestedS
     }
 
     @Override
-    public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
+    public boolean onNestedFling(@NotNull View target, float velocityX, float velocityY, boolean consumed) {
         return false;
     }
 

@@ -1,9 +1,9 @@
 package com.pfl.app
 
-import android.app.Application
+import com.pfl.lib_common.base.BaseApplication
 import com.pfl.lib_common.utils.BaseUrlManager
 
-class GeekApplication : Application(){
+class GeekApplication : BaseApplication(){
     override fun onCreate() {
         super.onCreate()
         BaseUrlManager.init("https://data.moxinga.com/",true)

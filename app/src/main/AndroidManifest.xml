@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:dist="http://schemas.android.com/apk/distribution"
-          xmlns:tools="http://schemas.android.com/tools" package="com.pfl.geeknews">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.pfl.geeknews">
 
     <dist:module dist:instant="true"/>
+
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
@@ -15,10 +17,17 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
+        <activity
+                android:name="com.pfl.coroutines.CoroutinesActivity"
+                android:label="@string/title_activity_coroutines"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name="com.pfl.news_detail.NewsDetailActivity">
+        </activity>
 
         <meta-data
                 android:name="UMENG_CHANNEL"
-                android:value="${UMENG_CHANNEL_VALUE}" />
+                android:value="${UMENG_CHANNEL_VALUE}"/>
 
         <activity android:name=".MainActivity">
             <intent-filter>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.pfl.lib_common.wedget.NestedScrollingDetailContainer
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/nestedContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <com.pfl.lib_common.wedget.NestedScrollingWebView
+            android:id="@+id/webContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="nested_scroll_webview"/>
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:text="不可滑动的View"
+            android:textSize="30dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:tag="nested_scroll_recyclerview"/>
+
+
+</com.pfl.lib_common.wedget.NestedScrollingDetailContainer>
+

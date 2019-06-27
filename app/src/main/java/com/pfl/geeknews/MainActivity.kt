@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.howshea.basemodule.utils.toast
 import com.pfl.lib_common.base.BaseActivity
+import com.pfl.news_detail.NestedScrollActivity
 import com.pfl.news_detail.NewsDetailActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

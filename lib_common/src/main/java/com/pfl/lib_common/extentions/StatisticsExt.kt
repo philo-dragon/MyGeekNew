@@ -4,5 +4,5 @@ fun statisticsMethodRunTime(block: () -> Unit) {
     val startTime = System.currentTimeMillis()
     block()
     val endTime = System.currentTimeMillis()
-    println("${block.javaClass.simpleName} === ${endTime - startTime}")
+    println("${block.javaClass.name} === ${endTime - startTime}")
 }

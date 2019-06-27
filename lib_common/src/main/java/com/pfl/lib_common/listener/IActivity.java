@@ -9,10 +9,7 @@ import android.os.Bundle;
  */
 public interface IActivity {
 
-
     int getContentView();
-
-    //void componentInject(AppComponent appComponent);
 
     void initData(Bundle savedInstanceState);
 

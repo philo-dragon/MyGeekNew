@@ -40,14 +40,7 @@ public class RetrofitClient {
             url = BaseUrlManager.getBaseUrl();
         }
 
-        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new HttpLogger());
-        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .addNetworkInterceptor(logInterceptor)
-                .cookieJar(new CookieManger(context))
-                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-                .build();
+        OkHttpClient okHttpClient = getOkHttpClient();
 
         mRetrofit = new Retrofit.Builder()
                 .client(okHttpClient)
@@ -56,9 +49,24 @@ public class RetrofitClient {
                 .build();
     }
 
+    public OkHttpClient getOkHttpClient() {
+
+        HttpLoggingInterceptor logInterceptor = new HttpLoggingInterceptor(new HttpLogger());
+        logInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        return new OkHttpClient.Builder()
+                .addInterceptor(logInterceptor)
+                .retryOnConnectionFailure(true)
+                .cookieJar(new CookieManger(App.getInstance()))
+                .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .writeTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
+                .build();
+
+    }
+
     public <T> T create(Class<T> clazz) {
         return mRetrofit.create(clazz);
     }
-
 
 }

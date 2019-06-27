@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.howshea.basemodule.utils.toast
 import com.pfl.lib_common.base.BaseActivity
+import com.pfl.lib_common.extentions.statisticsMethodRunTime
 import com.pfl.news_detail.NestedScrollActivity
 import com.pfl.news_detail.NewsDetailActivity
 import kotlinx.coroutines.Dispatchers
@@ -52,12 +53,12 @@ class MainActivity : BaseActivity() {
     }
 
     fun requestData(view: View) {
-        showDialog()
+        statisticsMethodRunTime { showDialog() }
         loginViewModel.login("13488747197", "12345678a")
     }
 
     fun goDetail(view: View) {
-        startActivity(Intent(this, NewsDetailActivity::class.java))
+        startActivity(Intent(this, NestedScrollActivity::class.java))
     }
 
 }

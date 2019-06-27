@@ -27,10 +27,18 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //是否输出日志
+            buildConfigField 'boolean', 'IS_DEBUG', 'true'
+            //对应服务器地址
+            buildConfigField 'String', 'SERVER_URL', '"https://data.moxinga.com/"'
         }
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            //是否输出日志
+            buildConfigField 'boolean', 'IS_DEBUG', 'false'
+            //对应服务器地址
+            buildConfigField 'String', 'SERVER_URL', '"https://data.moxinga.com/"'
         }
     }
 }
@@ -41,8 +49,5 @@ dependencies {
 
     implementation project(':lib_common')
 
-    implementation 'androidx.appcompat:appcompat:1.0.0-beta01'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    implementation 'com.google.android.material:material:1.0.0-beta01'
     annotationProcessor rootProject.ext.annotationProcessorLibs
 }

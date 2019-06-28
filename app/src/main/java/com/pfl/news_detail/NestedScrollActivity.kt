@@ -12,7 +12,7 @@ class NestedScrollActivity : BaseActivity() {
 
     override fun isImmersive() = false
 
-    override fun isDarkMode() = false
+    override fun isDrakMode() = false
 
     override fun initView() {
         initWebView()

@@ -22,11 +22,11 @@ class MainActivity : BaseActivity() {
         ViewModelProviders.of(this).get(LoginViewModel::class.java)
     }
 
-    override fun getContentView() = R.layout.activity_main
-
     override fun isImmersive() = false
 
-    override fun isDarkMode() = false
+    override fun isDrakMode() = false
+
+    override fun getContentView() = R.layout.activity_main
 
     override fun initData(savedInstanceState: Bundle?) {
         startObserve()

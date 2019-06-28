@@ -15,6 +15,8 @@ class NewsDetailActivity : BaseActivity() {
 
     override fun isImmersive() = false
 
+    override fun isDrakMode() = false
+
     override fun initView() {
         initWebView()
         initRecyclerView()

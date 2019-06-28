@@ -17,11 +17,7 @@ import com.pfl.lib_common.utils.StatusBarUtil
 abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
 
     lateinit var mContext: AppCompatActivity
-
-    /**
-     * @return 是否深色模式
-     */
-     var isDarkMode: Boolean = true
+    private val mLifecycleRegistry = LifecycleRegistry(this)
 
     /**
      * @return 窗口默认背景颜色
@@ -29,7 +25,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
     var backgroundColorRes: Int = R.color.background
 
     override fun getLifecycle(): Lifecycle {
-        return LifecycleRegistry(this)
+        return mLifecycleRegistry
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,7 +75,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
      * 设置深色模式
      */
     private fun darkMode() {
-        doDrakMode(isDarkMode)
+        doDrakMode(isDrakMode())
     }
 
     /**
@@ -94,6 +90,13 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
      * @return 是否沉浸式
      */
     override fun isImmersive(): Boolean {
+        return true
+    }
+
+    /**
+     * @return 是否沉浸式
+     */
+   open fun isDrakMode(): Boolean {
         return true
     }
 

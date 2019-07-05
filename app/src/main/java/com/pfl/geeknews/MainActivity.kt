@@ -9,11 +9,6 @@ import com.howshea.basemodule.utils.toast
 import com.pfl.lib_common.base.BaseActivity
 import com.pfl.lib_common.extentions.statisticsMethodRunTime
 import com.pfl.news_detail.NestedScrollActivity
-import com.pfl.news_detail.NewsDetailActivity
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
 
 
 class MainActivity : BaseActivity() {
@@ -25,6 +20,8 @@ class MainActivity : BaseActivity() {
     override fun isImmersive() = false
 
     override fun isDrakMode() = false
+
+    override fun backgroundColorRes() = R.color.background
 
     override fun getContentView() = R.layout.activity_main
 

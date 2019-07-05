@@ -19,11 +19,6 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
     lateinit var mContext: AppCompatActivity
     private val mLifecycleRegistry = LifecycleRegistry(this)
 
-    /**
-     * @return 窗口默认背景颜色
-     */
-    var backgroundColorRes: Int = R.color.background
-
     override fun getLifecycle(): Lifecycle {
         return mLifecycleRegistry
     }
@@ -96,9 +91,14 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
     /**
      * @return 是否沉浸式
      */
-   open fun isDrakMode(): Boolean {
+    open fun isDrakMode(): Boolean {
         return true
     }
+
+    /**
+     * @return 窗口默认背景颜色
+     */
+    open fun backgroundColorRes() = R.color.background
 
     /**
      * @param color 状态栏背景颜色
@@ -124,7 +124,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
     fun initListener() {}
 
     private fun setContentView() {
-        window.setBackgroundDrawableResource(backgroundColorRes)
+        window.setBackgroundDrawableResource(backgroundColorRes())
         contentView = contentView
     }
 

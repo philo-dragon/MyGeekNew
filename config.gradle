@@ -78,6 +78,7 @@ ext {
             flexibledivider: "com.yqritc:recyclerview-flexibledivider:1.4.0",
             banner         : "com.youth.banner:banner:1.4.10",
             logger         : "com.orhanobut:logger:1.15",
+            mmkv           : "com.tencent:mmkv:1.0.22",
     ]
 
     testDeps = [

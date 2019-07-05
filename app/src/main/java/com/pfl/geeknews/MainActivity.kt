@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.howshea.basemodule.utils.toast
 import com.pfl.lib_common.base.BaseActivity
 import com.pfl.lib_common.extentions.statisticsMethodRunTime
+import com.pfl.lib_common.utils.SPUtils
 import com.pfl.news_detail.NestedScrollActivity
 
 

@@ -10,6 +10,11 @@ import com.jojo.design.common_ui.dialog.LoadingDialog
 import com.pfl.lib_common.R
 import com.pfl.lib_common.listener.IActivity
 import com.pfl.lib_common.utils.StatusBarUtil
+import android.app.ActivityManager
+import android.content.Context
+import android.content.Intent
+import android.util.Log
+
 
 /**
  * Activity 基类 设置公用的方法,属性
@@ -18,6 +23,9 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
 
     lateinit var mContext: AppCompatActivity
     private val mLifecycleRegistry = LifecycleRegistry(this)
+
+    //用来控制应用前后台切换的逻辑
+    private var isCurrentRunningForeground = true
 
     override fun getLifecycle(): Lifecycle {
         return mLifecycleRegistry
@@ -49,6 +57,41 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
             val fragmentTag = "android:support:fragments"
             outState.remove(fragmentTag)
         }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (!isCurrentRunningForeground) {
+            isCurrentRunningForeground = true
+            //处理跳转到广告页逻辑
+            //val intennt = Intent(this, LoadingActivity::class.java)
+            //startActivity(intennt)
+            Log.e("BaseActivity", ">>>>>>>>>>>>>>>>>>>切回前台 activity process")
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        isCurrentRunningForeground = isRunningForeground()
+        if (!isCurrentRunningForeground) {
+            Log.e("BaseActivity", ">>>>>>>>>>>>>>>>>>>切到后台 activity process")
+        }
+    }
+
+    fun isRunningForeground(): Boolean {
+        val activityManager = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+        val appProcessInfos = activityManager.runningAppProcesses
+        // 枚举进程,查看该应用是否在运行
+        for (appProcessInfo in appProcessInfos) {
+            if (appProcessInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
+                if (appProcessInfo.processName == this.applicationInfo.processName) {
+                    Log.e("BaseActivity", "EntryActivity isRunningForeGround")
+                    return true
+                }
+            }
+        }
+        Log.e("BaseActivity", "EntryActivity isRunningBackGround")
+        return false
     }
 
     /**

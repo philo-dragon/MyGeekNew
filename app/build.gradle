@@ -2,12 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-def getDate() {
-    def date = new Date()
-    def formattedDate = date.format('yyyyMMddHHmm')
-    return formattedDate
-}
-
 android {
 
     compileSdkVersion rootProject.ext.android.targetSdkVersion
@@ -20,13 +14,8 @@ android {
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         flavorDimensions "versionCode"
-        multiDexEnabled true
 
-        resValue("string", 'app_version', APP_VERSION)
-        buildConfigField "boolean", "LEO_DEBUG", "true"
-        buildConfigField 'String', 'API_SERVER_URL', RELEASE_API_SERVER_URL
-        buildConfigField 'String', 'API_SERVER_URL_MALL', RELEASE_API_SERVER_URL_MALL
-        signingConfig signingConfigs.signingConfig
+        multiDexEnabled true
     }
 
     compileOptions {
@@ -52,45 +41,6 @@ android {
             buildConfigField 'String', 'SERVER_URL', '"https://data.moxinga.com/"'
         }
     }
-
-    //渠道Flavors，我这里写了一些常用的
-    productFlavors {
-        commonsoon {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "commonsoon"]
-        }
-        zhushou91 {
-            manifestPlaceholders = [UMENG_CHANNEL_VALUE: "zhushou91"]
-        }
-    }
-
-    //修改生成的apk名字
-    applicationVariants.all { variant ->
-        variant.outputs.each { output ->
-            def newName
-            def timeNow
-            def oldFile = output.outputFile
-            def outDirectory = oldFile.parent
-
-            if ("true".equals(IS_JENKINS)) {
-                timeNow = JENKINS_TIME
-                outDirectory = 'C:/file/apk'
-                newName = 'student-android-v' +
-                        APP_VERSION + '-' + variant.productFlavors[0].name + timeNow + '-' + variant.buildType.name + '.apk'
-            } else {
-                timeNow = getDate()
-                if (variant.buildType.name.equals('debug')) {
-                    newName = "'student-android-v${APP_VERSION}-debug.apk"
-                } else {
-                    newName = 'student-android-v' +
-                            APP_VERSION + '-' + variant.productFlavors[0].name + timeNow + '-' + variant.buildType.name + '.apk'
-                }
-            }
-
-            output.outputFile = new File(outDirectory, newName)
-
-        }
-    }
-
 }
 
 dependencies {

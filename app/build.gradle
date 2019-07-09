@@ -41,6 +41,20 @@ android {
             buildConfigField 'String', 'SERVER_URL', '"https://data.moxinga.com/"'
         }
     }
+
+    //修改生成的apk名字
+    applicationVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "MyGeekNew-${variant.versionCode}-V${variant.versionName}-${getDate()}.apk"
+        }
+    }
+}
+
+//该方法在android外层
+static def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyy年MM月dd日HH时mm分')  // 不能用:
+    return formattedDate
 }
 
 dependencies {

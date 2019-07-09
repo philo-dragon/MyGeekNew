@@ -19,6 +19,7 @@ class NestedScrollActivity : BaseActivity() {
     }
 
     private fun initWebView() {
+        print("111111111111111")
         webView.settings.javaScriptEnabled = true
         webView.webViewClient = WebViewClient()
         webView.webChromeClient = WebChromeClient()

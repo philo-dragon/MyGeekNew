@@ -1,7 +1,10 @@
 package com.pfl.lib_common.base
 
+import android.app.ActivityManager
+import android.content.Context
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
@@ -10,10 +13,6 @@ import com.jojo.design.common_ui.dialog.LoadingDialog
 import com.pfl.lib_common.R
 import com.pfl.lib_common.listener.IActivity
 import com.pfl.lib_common.utils.StatusBarUtil
-import android.app.ActivityManager
-import android.content.Context
-import android.content.Intent
-import android.util.Log
 
 
 /**
@@ -78,7 +77,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
         }
     }
 
-    fun isRunningForeground(): Boolean {
+    private fun isRunningForeground(): Boolean {
         val activityManager = this.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
         val appProcessInfos = activityManager.runningAppProcesses
         // 枚举进程,查看该应用是否在运行
@@ -164,7 +163,7 @@ abstract class BaseActivity : AppCompatActivity(), IActivity, LifecycleOwner {
     /**
      * 初始化监听
      */
-    fun initListener() {}
+    open fun initListener() {}
 
     private fun setContentView() {
         window.setBackgroundDrawableResource(backgroundColorRes())

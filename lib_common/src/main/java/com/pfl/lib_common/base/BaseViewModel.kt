@@ -3,6 +3,7 @@ package com.pfl.lib_common.base
 import android.annotation.SuppressLint
 import androidx.lifecycle.*
 import com.google.gson.JsonParseException
+import com.howshea.basemodule.utils.toast
 import com.pfl.lib_common.exception.ApiException
 import com.pfl.lib_common.exception.NoNetworkException
 import com.pfl.lib_common.base.ErrorType.*
@@ -68,14 +69,14 @@ open class BaseViewModel : ViewModel() {
             onException(BAD_NETWORK, message)
         } else if (e is NoNetworkException) {// 没有网络
             onException(NOT_NETWORK, message)
-        } else if (e is ConnectException || e is UnknownHostException) {   //   连接错误
+        } else if (e is ConnectException || e is UnknownHostException) {   // 连接错误
             onException(CONNECT_ERROR, message)
-        } else if (e is InterruptedIOException) {   //  连接超时
+        } else if (e is InterruptedIOException) {   // 连接超时
             onException(CONNECT_TIMEOUT, message)
         } else if (e is JsonParseException
             || e is JSONException
             || e is ParseException
-        ) {   //  解析错误
+        ) {   // 解析错误
             onException(PARSE_ERROR, message)
         } else if (e is ApiException) { // 自定义异常
             onException(API_ERROR, message)
@@ -95,10 +96,13 @@ open class BaseViewModel : ViewModel() {
                 errorLiveData.value = ErrorBean(type, message)
             }
             API_ERROR -> {
+                message?.let { toast(it) }
                 errorLiveData.value = ErrorBean(type, message)
             }
             else -> {
-                errorLiveData.value = ErrorBean(type, "未知错误")
+                val unknowMsg = "未知错误o(╯□╰)o"
+                unknowMsg.let { toast(it) }
+                errorLiveData.value = ErrorBean(type, unknowMsg)
             }
         }
     }

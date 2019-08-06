@@ -27,7 +27,6 @@ public class EyeCareUtil {
                 Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 App.getInstance().startActivity(intent);
-                return;
             } else {
                 //绘ui代码, 这里说明6.0系统已经有权限了
                 setWindowView(R.layout.eye_care_layout);

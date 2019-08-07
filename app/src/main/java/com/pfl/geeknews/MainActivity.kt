@@ -1,7 +1,10 @@
 package com.pfl.geeknews
 
 import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -9,6 +12,7 @@ import com.howshea.basemodule.utils.toast
 import com.pfl.lib_common.base.BaseActivity
 import com.pfl.lib_common.extentions.statisticsMethodRunTime
 import com.pfl.news_detail.NestedScrollActivity
+import com.pfl.floating.FloatViewService
 
 
 class MainActivity : BaseActivity() {
@@ -50,12 +54,27 @@ class MainActivity : BaseActivity() {
     }
 
     fun requestData(view: View) {
-        statisticsMethodRunTime { showDialog() }
-        loginViewModel.login("13488747197", "12345678a")
-    }
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (!Settings.canDrawOverlays(this)) {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                    Uri.parse("package:$packageName")
+                )
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                startActivity(intent)
+            } else {
+                statisticsMethodRunTime { showDialog() }
+                loginViewModel.login("13488747197", "12345678a")
+                val intent = Intent(this@MainActivity, FloatViewService::class.java)
+                startService(intent)
+            }
 
-    fun goDetail(view: View) {
-        startActivity(Intent(this, NestedScrollActivity::class.java))
-    }
 
+        }
+
+        fun goDetail(view: View) {
+            startActivity(Intent(this, NestedScrollActivity::class.java))
+        }
+
+    }
 }

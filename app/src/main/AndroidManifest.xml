@@ -7,6 +7,7 @@
     <dist:module dist:instant="true"/>
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
             android:name="com.pfl.app.GeekApplication"
@@ -33,6 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <service android:name="com.pfl.floating.FloatViewService"/>
     </application>
 
 </manifest>

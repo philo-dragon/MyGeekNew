@@ -38,17 +38,14 @@ class MainActivity : BaseActivity() {
 
             loginLiveData.observe(this@MainActivity, Observer {
                 dismissDialog()
-                toast("请求成功")
             })
 
             dailyLiveData.observe(this@MainActivity, Observer {
                 dismissDialog()
-                toast("请求成功")
             })
 
             getErrorObserve().observe(this@MainActivity, Observer {
                 dismissDialog()
-                toast(it.message)
             })
         }
     }
@@ -64,7 +61,7 @@ class MainActivity : BaseActivity() {
                 startActivity(intent)
             } else {
                 statisticsMethodRunTime { showDialog() }
-                loginViewModel.login("13488747197", "12345678a")
+                loginViewModel.anyRequest("13488747197", "12345678a")
                 val intent = Intent(this@MainActivity, FloatViewService::class.java)
                 startService(intent)
             }

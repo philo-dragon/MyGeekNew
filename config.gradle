@@ -78,6 +78,7 @@ ext {
             banner         : "com.youth.banner:banner:1.4.10",
             logger         : "com.orhanobut:logger:1.15",
             mmkv           : "com.tencent:mmkv:1.0.22",
+            stallbuster    : "com.github.zhangjianli:stallbuster:1.1",
     ]
 
     testDeps = [

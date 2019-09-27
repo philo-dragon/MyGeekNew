@@ -25,6 +25,7 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+        StallBuster.getInstance().init(this);
         super.onCreate();
         registerLifecycleCallbacks();//注册Activity生命周期监听
         SPUtils.init(this);

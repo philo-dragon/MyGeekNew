@@ -1,13 +1,12 @@
 package com.pfl.lib_common.base
 
 import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.jojo.design.common_ui.dialog.LoadingDialog
+import com.pfl.lib_common.dialog.LoadingDialog
 import com.pfl.lib_common.listener.IActivity
 
 

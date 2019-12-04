@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
-import com.jojo.design.common_ui.dialog.LoadingDialog
+import com.pfl.lib_common.dialog.LoadingDialog
 import com.pfl.lib_common.R
 import com.pfl.lib_common.listener.IActivity
 import com.pfl.lib_common.utils.StatusBarUtil

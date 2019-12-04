@@ -1,4 +1,4 @@
-package com.howshea.basemodule.extentions
+package com.pfl.lib_common.extentions
 
 import io.reactivex.Completable
 import io.reactivex.Flowable

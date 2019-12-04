@@ -1,4 +1,4 @@
-package com.jojo.design.common_ui.dialog
+package com.pfl.lib_common.dialog
 
 import android.app.Activity
 import android.app.Dialog

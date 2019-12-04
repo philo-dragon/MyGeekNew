@@ -49,12 +49,12 @@ class LoadingCircleView @JvmOverloads constructor(context: Context, attrs: Attri
         super.onDraw(canvas)
 
         mPaint.color = bgColor
-        canvas.drawCircle(mWidth / 2, mWidth / 2, mWidth / 2 - mPadding, mPaint!!)
+        canvas.drawCircle(mWidth / 2, mWidth / 2, mWidth / 2 - mPadding, mPaint)
         mPaint.color = barColor
         @SuppressLint("DrawAllocation")
         val rectF = RectF(mPadding, mPadding, mWidth - mPadding, mWidth - mPadding)
         //第四个参数是否显示半径
-        canvas.drawArc(rectF, startAngle, 100f, false, mPaint!!)
+        canvas.drawArc(rectF, startAngle, 100f, false, mPaint)
     }
 
 
@@ -71,11 +71,11 @@ class LoadingCircleView @JvmOverloads constructor(context: Context, attrs: Attri
     }
 
     fun stopAnim() {
-        if (valueAnimator != null) {
+        valueAnimator?.run{
             clearAnimation()
-            valueAnimator!!.repeatCount = 1
-            valueAnimator!!.cancel()
-            valueAnimator!!.end()
+            repeatCount = 1
+            cancel()
+            end()
         }
     }
 

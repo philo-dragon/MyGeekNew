@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.fragment.app.Fragment
+import com.pfl.lib_common.utils.App
 
 private var toast: Toast? = null
 
@@ -27,13 +27,13 @@ fun Context.toast(@StringRes resId: Int) {
 }
 
 @SuppressLint("ShowToast")
-fun <T : Fragment> T.toast(text: CharSequence) {
-    context?.toast(text)
+fun toast(text: CharSequence) {
+    App.getInstance().toast(text)
 }
 
 /**
  * @param resId 字符串资源
  */
-fun <T : Fragment> T.toast(@StringRes resId: Int) {
-    toast(getString(resId))
+fun toast(@StringRes resId: Int) {
+    toast(App.getInstance().resources.getString(resId))
 }

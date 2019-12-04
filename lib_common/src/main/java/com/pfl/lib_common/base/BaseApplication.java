@@ -7,11 +7,11 @@ import android.os.Bundle;
 import androidx.multidex.MultiDex;
 import com.pfl.lib_common.listener.ActivityLifecycleCallBacksImpl;
 import com.pfl.lib_common.utils.AppManager;
+import com.pfl.lib_common.utils.SPUtils;
+import com.tencent.mmkv.MMKV;
 
 
 public class BaseApplication extends Application {
-
-   // private AppComponent appComponent;
 
     /**
      * 如果你使用了LayoutInflater.from(getApplicationContext())或者LayoutInflater.from(getApplication())
@@ -25,28 +25,11 @@ public class BaseApplication extends Application {
 
     @Override
     public void onCreate() {
+        StallBuster.getInstance().init(this);
         super.onCreate();
         registerLifecycleCallbacks();//注册Activity生命周期监听
-        initAppComponent();//初始化Dagger2
-
+        SPUtils.init(this);
     }
-
-    protected void initAppComponent() {
-
-       /* if (appComponent == null) {
-            appComponent = DaggerAppComponent.builder()
-                    .appModule(new AppModule(this))
-                    .networkModule(new NetworkModule())
-                    .build();
-        }*/
-
-    }
-
-
-   /* public AppComponent getAppComponent() {
-        return appComponent;
-    }*/
-
 
     private void registerLifecycleCallbacks() {
         registerActivityLifecycleCallbacks(new ActivityLifecycleCallBacksImpl() {
